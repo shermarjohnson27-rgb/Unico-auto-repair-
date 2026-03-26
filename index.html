@@ -3,473 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unico Auto Repair | North Philadelphia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>Unico Auto Repair | Philadelphia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --red: #D72B2B;
-            --dark-red: #9B1A1A;
             --black: #0A0A0A;
-            --dark: #111111;
-            --card: #161616;
-            --border: #222222;
-            --text: #E8E8E8;
-            --muted: #888;
-            --gold: #F5A623;
+            --dark-grey: #161616;
+            --light-grey: #E8E8E8;
+            --border: #222;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background: var(--black);
-            color: var(--text);
+            background-color: var(--black);
+            color: var(--light-grey);
             font-family: 'Barlow', sans-serif;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* WATERMARK */
-        .watermark-overlay {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9999;
-            overflow: hidden;
-        }
-        .watermark-text {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 80px;
-        }
-        .wm {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 48px;
-            color: rgba(215, 43, 43, 0.08);
-            letter-spacing: 6px;
-            transform: rotate(-35deg);
-            white-space: nowrap;
-            user-select: none;
-        }
-
-        /* NAV */
+        /* NAVIGATION */
         nav {
             position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
+            width: 100%;
+            height: 70px;
+            background: rgba(10, 10, 10, 0.95);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 40px;
-            height: 70px;
-            background: rgba(10,10,10,0.95);
+            padding: 0 5%;
+            z-index: 1000;
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
         }
-        .nav-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            letter-spacing: 4px;
-            color: var(--text);
-            text-decoration: none;
-        }
-        .nav-logo span { color: var(--red); }
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-        .nav-links a {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--red); }
-        .nav-cta {
-            background: var(--red);
-            color: white !important;
-            padding: 10px 24px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 13px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-        .nav-cta:hover { background: var(--dark-red); }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; }
+        .logo span { color: var(--red); }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: white; text-transform: uppercase; font-weight: 600; font-size: 0.9rem; }
+        .btn-call { background: var(--red); color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; }
 
-        /* HERO */
+        /* HERO SECTION */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 40px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse 60% 50% at 70% 50%, rgba(215,43,43,0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(215,43,43,0.06) 0%, transparent 60%);
-        }
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 700px; }
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 24px;
-        }
-        .hero-tag::before { content: ''; display: block; width: 30px; height: 2px; background: var(--red); }
-        .hero h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(64px, 10vw, 110px);
-            line-height: 0.9;
-            letter-spacing: 4px;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-        .hero h1 span { color: var(--red); display: block; }
-        .hero-sub {
-            font-size: 16px;
-            color: var(--muted);
-            margin: 28px 0 40px;
-            line-height: 1.7;
-            max-width: 480px;
-            font-weight: 300;
-        }
-        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-        .btn-primary {
-            background: var(--red);
-            color: white;
-            padding: 16px 36px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 700;
-            letter-spacing: 3px;
-            font-size: 14px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary:hover { background: var(--dark-red); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(215, 43, 43, 0.2); }
-        .btn-outline {
-            background: transparent;
-            color: var(--text);
-            padding: 15px 36px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 700;
-            letter-spacing: 3px;
-            font-size: 14px;
-            text-transform: uppercase;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            transition: all 0.2s;
-        }
-        .btn-outline:hover { border-color: var(--red); color: var(--red); }
-
-        .hero-stats {
-            position: absolute;
-            right: 40px;
-            bottom: 80px;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&q=80&w=2000') center/cover;
             display: flex;
             flex-direction: column;
-            gap: 32px;
-            z-index: 2;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
         }
-        .stat { text-align: right; }
-        .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; color: var(--red); letter-spacing: 2px; }
-        .stat-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-family: 'Barlow Condensed', sans-serif; }
+        .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; margin-bottom: 10px; }
+        .hero h1 span { color: var(--red); }
+        .hero p { max-width: 600px; font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
 
-        /* MARQUEE */
-        .marquee-wrap { background: var(--red); padding: 14px 0; overflow: hidden; white-space: nowrap; }
-        .marquee-inner { display: inline-flex; animation: marquee 30s linear infinite; }
-        .marquee-item { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; padding: 0 40px; color: white; opacity: 0.9; }
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* SERVICES */
-        section { padding: 100px 40px; }
-        .section-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-        .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--red); }
-        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 72px); letter-spacing: 3px; line-height: 1; color: var(--text); }
-        
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 40px; }
+        /* SERVICES GRID */
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; text-align: center; margin-bottom: 50px; }
+        .services { padding: 80px 5%; background: var(--black); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
         .service-card {
-            background: var(--card);
+            background: var(--dark-grey);
+            padding: 30px;
             border: 1px solid var(--border);
-            padding: 40px 28px;
-            position: relative;
-            transition: all 0.3s ease;
-            cursor: default;
+            transition: 0.3s;
+            text-align: left;
         }
-        .service-card:hover { border-color: var(--red); transform: translateY(-5px); background: #1a1a1a; }
-        .service-icon { font-size: 32px; margin-bottom: 20px; color: var(--red); display: block; opacity: 0.8; }
-        .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 1px; color: var(--text); text-transform: uppercase; }
-        .service-num { position: absolute; top: 15px; right: 20px; font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: rgba(255,255,255,0.03); }
-
-        /* ABOUT */
-        .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .about-box { background: var(--card); border: 1px solid var(--border); padding: 60px 40px; position: relative; z-index: 1; }
-        .about-box::after { content: ''; position: absolute; bottom: -12px; right: -12px; width: 100%; height: 100%; border: 1px solid var(--red); z-index: -1; }
-        .about-quote { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 3px; line-height: 1.1; color: var(--text); margin-bottom: 24px; }
-        .about-quote span { color: var(--red); }
-        .feature-list { list-style: none; margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .feature-list li { display: flex; align-items: center; gap: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--text); }
-        .feature-list li::before { content: '✓'; color: var(--red); font-weight: 900; }
+        .service-card:hover { border-color: var(--red); transform: translateY(-5px); }
+        .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--red); margin-bottom: 10px; }
 
         /* REVIEWS */
-        .reviews-section { background: var(--dark); }
-        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
-        .review-card { background: var(--card); border: 1px solid var(--border); padding: 36px 28px; }
-        .review-author { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--red); margin-top: 20px; display: block; }
-        .rating-big { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--red); line-height: 1; }
+        .reviews { padding: 80px 5%; background: var(--dark-grey); }
+        .rating-box { text-align: center; margin-bottom: 40px; }
+        .stars { color: #F5A623; font-size: 1.5rem; }
+        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .review-card { background: var(--black); padding: 30px; border-radius: 8px; border-left: 4px solid var(--red); }
+        .author { display: block; margin-top: 15px; font-weight: bold; color: var(--red); }
 
-        /* CONTACT */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
-        .contact-form { display: flex; flex-direction: column; gap: 16px; }
-        .contact-form input, .contact-form textarea, .contact-form select {
-            background: var(--card); border: 1px solid var(--border); color: var(--text);
-            padding: 18px; font-family: 'Barlow', sans-serif; outline: none; transition: 0.3s;
+        /* CONTACT/INFO */
+        .info-section { padding: 80px 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .contact-details h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin-bottom: 20px; }
+        .detail-item { margin-bottom: 20px; font-size: 1.1rem; }
+        .detail-item strong { color: var(--red); text-transform: uppercase; display: block; }
+        
+        .contact-form { background: var(--dark-grey); padding: 40px; border-radius: 4px; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 12px; margin-bottom: 20px; background: #222; border: 1px solid #333; color: white;
         }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--red); background: #1a1a1a; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-        /* CTA */
-        .cta-band { background: var(--red); padding: 80px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; }
-        .cta-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: 54px; color: white; line-height: 1; }
+        .contact-form button {
+            width: 100%; padding: 15px; background: var(--red); border: none; color: white; font-weight: bold; cursor: pointer; text-transform: uppercase;
+        }
 
         /* FOOTER */
-        footer { background: var(--dark); padding: 60px 40px; border-top: 1px solid var(--border); }
-        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); text-decoration: none; }
-        .footer-logo span { color: var(--red); }
+        footer { padding: 40px 5%; text-align: center; border-top: 1px solid var(--border); font-size: 0.9rem; color: #666; }
 
-        /* MOBILE FIXES */
-        @media (max-width: 992px) {
-            .about-wrap, .contact-grid { grid-template-columns: 1fr; }
-            .hero-stats, .nav-links { display: none; }
-            .reviews-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 600px) {
-            nav { padding: 0 20px; }
-            section { padding: 60px 20px; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .service-card { padding: 25px 15px; text-align: center; }
-            .service-icon { margin-bottom: 10px; font-size: 24px; }
-            .service-name { font-size: 14px; }
-            .form-row { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 60px; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .info-section { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="watermark-overlay">
-    <div class="watermark-text">
-        <span class="wm">PREVIEW ONLY</span><span class="wm">PREVIEW ONLY</span>
-        <span class="wm">PREVIEW ONLY</span><span class="wm">PREVIEW ONLY</span>
-        <span class="wm">PREVIEW ONLY</span><span class="wm">PREVIEW ONLY</span>
-    </div>
-</div>
+    <nav>
+        <div class="logo">UNI<span>CO</span></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="tel:2677614137" class="btn-call">(267) 761-4137</a>
+    </nav>
 
-<nav>
-    <a href="#home" class="nav-logo">UNI<span>CO</span></a>
-    <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="tel:2677614137" class="nav-cta">Call (267) 761-4137</a>
-</nav>
+    <section class="hero" id="home">
+        <h1>UNI<span>CO</span> AUTO REPAIR</h1>
+        <p>North Philadelphia's trusted shop for over 147 happy customers. Honest pricing, expert mechanics, and fast turnaround.</p>
+        <a href="#contact" class="btn-call" style="padding: 15px 40px; font-size: 1.1rem;">Get A Free Quote</a>
+    </section>
 
-<section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-        <div class="hero-tag">Philadelphia's Trusted Mechanics</div>
-        <h1>FAST. HONEST.<span>RELIABLE.</span></h1>
-        <p class="hero-sub">Specializing in diagnostics, engine repair, and routine maintenance for all makes and models. Your neighborhood shop on Erie Ave.</p>
-        <div class="hero-actions">
-            <a href="#contact" class="btn-primary">Book Appointment</a>
-            <a href="#services" class="btn-outline">Browse Services</a>
+    <section class="services" id="services">
+        <h2 class="section-title">Professional Services</h2>
+        <div class="services-grid">
+            <div class="service-card"><h3>01. Diagnostics</h3><p>Full auto engine diagnostics using state-of-the-art equipment.</p></div>
+            <div class="service-card"><h3>02. Brakes</h3><p>Complete brake pad, rotor, and line replacement.</p></div>
+            <div class="service-card"><h3>03. Suspension</h3><p>Specializing in tie rods, ball joints, and front-end overhauls.</p></div>
+            <div class="service-card"><h3>04. Oil Change</h3><p>Fast, affordable oil and filter changes to keep you running.</p></div>
+            <div class="service-card"><h3>05. Transmission</h3><p>Expert transmission repair and fluid maintenance.</p></div>
+            <div class="service-card"><h3>06. A/C & Heating</h3><p>Air conditioning recharge and cabin filter replacement.</p></div>
+            <div class="service-card"><h3>07. Tires</h3><p>Tire rotation, balancing, and new tire installation.</p></div>
+            <div class="service-card"><h3>08. Battery</h3><p>Electrical testing and battery replacement services.</p></div>
         </div>
-    </div>
-    <div class="hero-stats">
-        <div class="stat"><div class="stat-num">4.4★</div><div class="stat-label">Google Rating</div></div>
-        <div class="stat"><div class="stat-num">147+</div><div class="stat-label">Happy Clients</div></div>
-    </div>
-</section>
+    </section>
 
-<div class="marquee-wrap">
-    <div class="marquee-inner">
-        <span class="marquee-item">OIL CHANGE</span>
-        <span class="marquee-item">BRAKE REPAIR</span>
-        <span class="marquee-item">ENGINE DIAGNOSTICS</span>
-        <span class="marquee-item">TRANSMISSION</span>
-        <span class="marquee-item">SUSPENSION</span>
-        <span class="marquee-item">A/C SERVICE</span>
-        <span class="marquee-item">OIL CHANGE</span>
-        <span class="marquee-item">BRAKE REPAIR</span>
-        <span class="marquee-item">ENGINE DIAGNOSTICS</span>
-        <span class="marquee-item">TRANSMISSION</span>
-        <span class="marquee-item">SUSPENSION</span>
-        <span class="marquee-item">A/C SERVICE</span>
-    </div>
-</div>
-
-<section id="services">
-    <div class="section-tag">Expert Solutions</div>
-    <h2 class="section-title">QUALITY<br>AUTO CARE</h2>
-    <div class="services-grid">
-        <div class="service-card"><span class="service-icon">🛢️</span><div class="service-name">Oil Change</div><div class="service-num">01</div></div>
-        <div class="service-card"><span class="service-icon">🛑</span><div class="service-name">Brake Systems</div><div class="service-num">02</div></div>
-        <div class="service-card"><span class="service-icon">💻</span><div class="service-name">Diagnostics</div><div class="service-num">03</div></div>
-        <div class="service-card"><span class="service-icon">❄️</span><div class="service-name">A/C Repair</div><div class="service-num">04</div></div>
-        <div class="service-card"><span class="service-icon">🔋</span><div class="service-name">Battery/Elect.</div><div class="service-num">05</div></div>
-        <div class="service-card"><span class="service-icon">🛞</span><div class="service-name">Tires & Alignment</div><div class="service-num">06</div></div>
-        <div class="service-card"><span class="service-icon">⚙️</span><div class="service-name">Transmission</div><div class="service-num">07</div></div>
-        <div class="service-card"><span class="service-icon">🔧</span><div class="service-name">Suspension</div><div class="service-num">08</div></div>
-    </div>
-</section>
-
-<section id="about" style="background: var(--dark);">
-    <div class="about-wrap">
-        <div class="about-box">
-            <div class="about-quote">BUILT ON<span> TRUST.</span><br>DRIVEN BY<span> RESULTS.</span></div>
-            <p>We treat every vehicle like it's our own. Serving North Philly with professional expertise and fair pricing.</p>
+    <section class="reviews" id="reviews">
+        <div class="rating-box">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="stars">★★★★★</div>
+            <p><strong>4.4 / 5.0</strong> Based on 147 Google Reviews</p>
         </div>
-        <div class="about-content">
-            <div class="section-tag">The Unico Standard</div>
-            <h2 class="section-title" style="margin-bottom: 20px;">WHY CHOOSE<br>OUR SHOP</h2>
-            <p>Located at 105 W Erie Ave, Unico Auto Repair is a staple of the community. We prioritize transparency over upselling.</p>
-            <ul class="feature-list">
-                <li>Certified Techs</li>
-                <li>Quick Turnaround</li>
-                <li>Fair Pricing</li>
-                <li>Modern Tools</li>
-                <li>Parts Warranty</li>
-                <li>Local Expertise</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section id="reviews" class="reviews-section">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
-        <div>
-            <div class="section-tag">Client Feedback</div>
-            <h2 class="section-title">REVIEWS</h2>
-        </div>
-        <div style="text-align: right;">
-            <div class="rating-big">4.4</div>
-            <div style="color:var(--gold)">★★★★★</div>
-        </div>
-    </div>
-    <div class="reviews-grid">
-        <div class="review-card">
-            <p style="font-style: italic; color: var(--muted)">"Great shop. They serviced my old Jeep Grand Cherokee... nailed the front end issues. Highly recommend."</p>
-            <span class="review-author">Julio C.</span>
-        </div>
-        <div class="review-card">
-            <p style="font-style: italic; color: var(--muted)">"Honest pricing and quick service. They got me in and out for brakes same day."</p>
-            <span class="review-author">Maria T.</span>
-        </div>
-        <div class="review-card">
-            <p style="font-style: italic; color: var(--muted)">"Engine light was on, they diagnosed it immediately. Fair price, no hidden fees."</p>
-            <span class="review-author">Derek W.</span>
-        </div>
-    </div>
-</section>
-
-<div class="cta-band">
-    <div>
-        <h2>NEED A QUOTE?</h2>
-        <p style="color: white; opacity: 0.8;">Open Mon–Sat | 8:00 AM – 5:00 PM</p>
-    </div>
-    <a href="tel:2677614137" class="btn-primary" style="background: white; color: var(--red);">CALL NOW</a>
-</div>
-
-<section id="contact">
-    <div class="contact-grid">
-        <div>
-            <div class="section-tag">Find Us</div>
-            <h2 class="section-title" style="margin-bottom: 30px;">LOCATION</h2>
-            <p style="font-size: 20px; font-weight: 600; margin-bottom: 10px;">105 W Erie Ave</p>
-            <p style="color: var(--muted); margin-bottom: 30px;">Philadelphia, PA 19140</p>
-            <p style="color: var(--red); font-weight: 700;">(267) 761-4137</p>
-        </div>
-        <form class="contact-form" id="serviceForm">
-            <div class="form-row">
-                <input type="text" id="fname" placeholder="First Name" required>
-                <input type="text" id="lname" placeholder="Last Name" required>
+        <div class="review-grid">
+            <div class="review-card">
+                <p>"The new shop over on Hunting Park Ave is off to a great start. They serviced my old Jeep Grand Cherokee... they nailed it. Reasonable price!"</p>
+                <span class="author">— Julio Corcino (Local Guide)</span>
             </div>
-            <input type="email" id="email" placeholder="Email Address" required>
-            <select id="serviceType">
-                <option value="General Inquiry">Select a Service</option>
-                <option value="Oil Change">Oil Change</option>
-                <option value="Brakes">Brake Repair</option>
-                <option value="Engine Diagnostic">Diagnostics</option>
-                <option value="A/C Repair">A/C Service</option>
-            </select>
-            <textarea id="issue" placeholder="Tell us about your car issue..."></textarea>
-            <button type="submit" class="btn-primary">Send Request</button>
-        </form>
-    </div>
-</section>
+            <div class="review-card">
+                <p>"Accommodating staff providing quick oil changes and tire work. My go-to spot in North Philly."</p>
+                <span class="author">— Verified Customer</span>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    <a href="#" class="footer-logo">UNI<span>CO</span></a>
-    <p style="color: var(--muted); font-size: 12px; margin-top: 20px;">© 2026 Unico Auto Repair Philadelphia. All Rights Reserved.</p>
-</footer>
-
-<script>
-    document.getElementById('serviceForm').onsubmit = function(e) {
-        e.preventDefault();
+    <section class="info-section" id="contact">
+        <div class="contact-details">
+            <h2>Visit Our Shop</h2>
+            <div class="detail-item">
+                <strong>Address</strong>
+                105 W Erie Ave, Philadelphia, PA 19140
+            </div>
+            <div class="detail-item">
+                <strong>Hours</strong>
+                Mon - Sat: 8:00 AM - 5:00 PM<br>
+                Sunday: Closed
+            </div>
+            <div class="detail-item">
+                <strong>Phone</strong>
+                (267) 761-4137
+            </div>
+        </div>
         
-        const data = {
-            name: `${document.getElementById('fname').value} ${document.getElementById('lname').value}`,
-            email: document.getElementById('email').value,
-            service: document.getElementById('serviceType').value,
-            message: document.getElementById('issue').value
-        };
+        <form class="contact-form" action="#">
+            <h2>Send a Message</h2>
+            <input type="text" placeholder="Your Name" required>
+            <input type="text" placeholder="Vehicle Make/Model" required>
+            <textarea rows="5" placeholder="What issues are you having?"></textarea>
+            <button type="submit">Request Appointment</button>
+        </form>
+    </section>
 
-        const subject = encodeURIComponent(`New Service Request: ${data.service}`);
-        const body = encodeURIComponent(
-            `Name: ${data.name}\nEmail: ${data.email}\nService: ${data.service}\n\nDetails:\n${data.message}`
-        );
-
-        // Replace with actual business email
-        window.location.href = `mailto:unicorepairphilly@gmail.com?subject=${subject}&body=${body}`;
-        alert("Success! Opening your email app to send the request to Unico.");
-    };
-</script>
+    <footer>
+        <p>&copy; 2026 Unico Auto Repair Philadelphia. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
